@@ -16,7 +16,9 @@ int main() {
     //  - print turn outcome
     print_greeting();
 
-    GameField field {};
+    //GameField field {};
+    GameField field;//new
+    Get_Field(&field);//new
     TurnOutcome outcome {};
     PlayerSign current_player = PlayerSign::X;
     do {

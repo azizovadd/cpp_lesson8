@@ -15,9 +15,29 @@ enum class PlayerSign
     O
 };
 
-constexpr size_t FIELD_WIDTH = 3;
+//constexpr size_t FIELD_WIDTH = 3;
 
-using GameField = CellState[FIELD_WIDTH * FIELD_WIDTH];
+//using GameField = CellState[FIELD_WIDTH * FIELD_WIDTH];
+
+size_t FIELD_WIDTH;
+using GameField = CellState*;
+void Get_Field (GameField* p)
+{
+    bool flag = false;
+    std::cout << "Please input size/width of the field\n";
+    while(!flag) {
+        std::cin >> FIELD_WIDTH;
+        if(std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+            std::cout << "Error: please input numbers!\n";
+        }
+        else flag = true;
+    }
+    
+    *p = new CellState[FIELD_WIDTH*FIELD_WIDTH]{};
+    
+}
 
 enum class TurnOutcome
 {
@@ -106,7 +126,7 @@ TurnOutcome check_turn_outcome(GameField const &field)
     }
 
     CHECK_LINE(0, 0, 1, 1);
-    CHECK_LINE(2, 0, -1, 1);
+    CHECK_LINE(FIELD_WIDTH-1, 0, -1, 1);
 
 #undef CHECK_LINE
 

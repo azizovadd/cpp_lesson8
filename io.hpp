@@ -12,7 +12,7 @@ void print_greeting()
 Pos query_player_move(GameField const& field)
 {
     Pos pos;
-    std::cout << "Please make a move: input two number in range [1-3]\n";
+    std::cout << "Please make a move: input two number in range [1-"<<FIELD_WIDTH<<"]\n";
     bool ok = false;
 
     while (!ok)
@@ -63,7 +63,11 @@ void print_cell(CellState cell)
 
 void print_field(GameField const &field)
 {
-    std::cout << "-------------\n";
+    for (int i=0; i < FIELD_WIDTH; i++) //варьируемая отрисовка поля в зависимости от его размера
+    {
+       std::cout << "----"; 
+    }
+    std::cout << "-\n";
     for (size_t col = 0; col < FIELD_WIDTH; col++)
     {
         std::cout << "| ";
@@ -72,7 +76,12 @@ void print_field(GameField const &field)
             print_cell(get_cell(field, row, col));
             std::cout << " | ";
         }
-            std::cout << "\n-------------\n";
+        std::cout << "\n";
+        for (int i=0; i < FIELD_WIDTH; i++)
+            {
+            std::cout << "----"; 
+            }
+        std::cout << "-\n";
     }
     std::cout << "\n";
 }
